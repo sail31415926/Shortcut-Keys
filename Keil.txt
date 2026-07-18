@@ -1,0 +1,40 @@
+keil
+F12		转到定义处
+Ctrl+F12		转到声明处
+Ctrl+I		逐字搜索
+Ctrl+G		到指定行
+Ctrl+L		剪切当前行
+Ctrl+`		设置
+
+F9		添加断点
+Ctrl+B		使能失能断点
+Ctrl+F9		取消所有断点
+
+Ctrl+\		到与当前括号匹配的括号				////
+Alt+\		选中当前括号中的所有内容				////
+
+Ctrl+[		减少缩进						////
+Ctrl+]		增加缩进						////
+
+Ctrl+（Num+）	到下一个所选内容的位置(没有Ctrl+F3好用)
+Ctrl+（Num-）	到上一个所选内容的位置(没有Ctrl+Shift+F3好用)
+
+Ctrl+-		回到先前位置					////
+Ctrl+Shift+-	回到下一个位置					////
+
+Ctrl+U		所选内容转换为小写
+Ctrl+Shift+U	所选内容转换为大写					////
+
+F2		转到下一个书签					////
+Shift+F2		转到上一个书签
+Ctrl+F2		添加/移除标签					////
+Ctrl+Shift+F2	清除当前文件所有书签
+
+F3		转到下一个当前找到的文本处(使用find后使用)		////
+Shift+F3		转到上一个当前找到的文本处(使用find后使用)		////
+Ctrl+F3		转到当前所选文字的下一处				////
+Ctrl+Shift+F3	转到当前所选文字的上一处				////
+
+Alt+X		折叠当前程序					////
+Ctrl+Alt+X	折叠所有程序					////
+Alt+C/Ctrl+Alt+C	展开所有程序		（添加Alt+C）		////

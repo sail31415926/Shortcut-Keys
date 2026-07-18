@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomKeySet derivedfrom="Windows" modifieddefault="false">
+   <Context id="Global">
+      <Action id="evaluate-selection">
+         <Stroke code="VK_ENTER"/>
+      </Action>
+      <Action id="jump-list-next">
+         <Stroke code="VK_MINUS" ctrl="on" shift="on"/>
+         <Stroke alt="on" code="VK_RIGHT"/>
+         <Stroke code="VK_RIGHT" meta="on"/>
+         <Stroke alt="on" code="VK_KP_RIGHT"/>
+         <Stroke code="VK_KP_RIGHT" meta="on"/>
+      </Action>
+      <Action id="jump-list-prev">
+         <Stroke code="VK_MINUS" ctrl="on"/>
+         <Stroke alt="on" code="VK_LEFT"/>
+         <Stroke code="VK_LEFT" meta="on"/>
+         <Stroke alt="on" code="VK_KP_LEFT"/>
+         <Stroke code="VK_KP_LEFT" meta="on"/>
+      </Action>
+      <Action id="zoom-in">
+         <Stroke code="VK_EQUALS" ctrl="on"/>
+         <Stroke code="VK_ADD" ctrl="on"/>
+      </Action>
+      <Action id="toggle-full-screen">
+         <Stroke code="VK_F11" ctrl="on"/>
+      </Action>
+      <Action id="enable-disable-breakpoint">
+         <Stroke code="VK_B" ctrl="on"/>
+      </Action>
+      <Action id="zoom-out">
+         <Stroke code="VK_SUBTRACT" ctrl="on"/>
+         <Stroke code="VK_EQUALS" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="find-and-replace">
+         <Stroke code="VK_F" ctrl="on"/>
+      </Action>
+      <Action id="expand-fold">
+         <Stroke alt="on" code="VK_C"/>
+         <Stroke code="VK_C" meta="on"/>
+      </Action>
+      <Action id="clear-all-breakpoints">
+         <Stroke code="VK_F9" ctrl="on"/>
+      </Action>
+      <Action id="comment">
+         <Stroke code="VK_SLASH" ctrl="on"/>
+      </Action>
+      <Action id="collapse-all">
+         <Stroke alt="on" code="VK_X" ctrl="on"/>
+         <Stroke code="VK_X" ctrl="on" meta="on"/>
+      </Action>
+      <Action id="uncomment">
+         <Stroke code="VK_R" ctrl="on" shift="on"/>
+         <Stroke code="VK_SLASH" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="comparisons-previous">
+         <Stroke code="VK_UP" ctrl="on"/>
+         <Stroke code="VK_KP_UP" ctrl="on"/>
+      </Action>
+      <Action id="expand-all-folds">
+         <Stroke alt="on" code="VK_C" ctrl="on"/>
+         <Stroke code="VK_C" ctrl="on" meta="on"/>
+      </Action>
+      <Action id="collapse-all-folds">
+         <Stroke alt="on" code="VK_X" ctrl="on"/>
+         <Stroke code="VK_X" ctrl="on" meta="on"/>
+      </Action>
+      <Action id="expand-all">
+         <Stroke alt="on" code="VK_C" ctrl="on"/>
+         <Stroke code="VK_C" ctrl="on" meta="on"/>
+      </Action>
+      <Action id="collapse-fold">
+         <Stroke alt="on" code="VK_X"/>
+         <Stroke code="VK_X" meta="on"/>
+      </Action>
+      <Action id="set-clear-breakpoint">
+         <Stroke code="VK_F9"/>
+      </Action>
+   </Context>
+   <Context id="CommandWindow">
+      <Action follows="None" id="evaluate-selection">
+         <Stroke code="VK_F9"/>
+      </Action>
+      <Action id="caret-end-line"/>
+      <Action id="clear-text-at-prompt"/>
+      <Action id="caret-backward"/>
+   </Context>
+   <Context id="Explorer">
+      <Action id="jump-list-next"/>
+      <Action follows="None" id="evaluate-selection">
+         <Stroke code="VK_F9"/>
+      </Action>
+      <Action id="jump-list-prev"/>
+   </Context>
+   <Context id="CommandHistory">
+      <Action id="evaluate-selection">
+         <Stroke code="VK_F9"/>
+      </Action>
+   </Context>
+   <Context id="HTMLRenderer">
+      <Action follows="None" id="evaluate-selection">
+         <Stroke code="VK_F9"/>
+      </Action>
+   </Context>
+   <Context id="MATLABEditor">
+      <Action id="jump-list-next"/>
+      <Action follows="None" id="evaluate-selection">
+         <Stroke code="VK_F9"/>
+      </Action>
+      <Action id="jump-list-prev"/>
+      <Action id="find-and-replace"/>
+   </Context>
+</CustomKeySet>

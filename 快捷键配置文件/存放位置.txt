@@ -1,0 +1,2 @@
+Latex:
+C:\Users\HP\AppData\Roaming\texstudio

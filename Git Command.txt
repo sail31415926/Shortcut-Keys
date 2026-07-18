@@ -1,0 +1,71 @@
+git config --global user.name "Sail_W"
+git config --global user.email "sail31415926@163.com"
+
+git config --global init.defaultBranch main	# 本地仓库默认新建初始分支名
+git config --global init.defaultBranch  		# 查看本地默认新建初始分支名
+
+git init
+git add .
+git commit -m "首次提交：自动驾驶轨迹跟踪项目代码"
+git branch -M main
+git remote add origin https://github.com/sail31415926/project_vehicle.git
+git push -u origin main   	#-u = --set-upstream，使用-u参数后续可以直接git push、git pull
+
+
+1.必学基础（日常 100% 天天用）
+环境初始化
+git init                  		# 新建git仓库
+git clone 仓库地址         	# 拉取远程代码（最常用）
+git config --global user.name "名字"
+git config --global user.email "邮箱"
+
+查看状态
+git status                		# 查看文件改动、未提交文件
+git diff                  		# 看文件具体修改内容
+git log                  	 	# 查看提交记录
+git log --oneline         	# 简洁版提交日志
+
+提交流程三部曲（核心）
+git add 文件名            	# 单个文件加入暂存区
+git add .                 		# 全部改动文件加入暂存
+git commit -m "提交备注"  	# 提交到本地仓库 -m:--message，附加本次提交的说明文字
+git push origin 本地分支名    	# 推送到远程仓库，-u = --set-upstream，设置当前本地分支，绑定对应的远程上游分支
+
+拉取更新
+git pull origin 本地分支名    	# 拉取远程最新代码并合并
+git fetch                 		# 只拉取远程记录，不自动合并
+
+2. 分支操作（多人协作、开发新功能必备，面试必问）
+git branch                		# 查看本地所有分支
+git branch 分支名        	# 创建新分支
+git checkout 分支名       	# 切换分支（旧版）
+git switch 分支名         	# 新版切换分支
+git checkout -b 分支名    	# 创建+切换一步到位,等价于branch+checkout/switch 
+git switch -c 分支名		# 新建分支并切过去
+
+git merge 分支名          	# 合并分支到当前分支
+git branch -d 分支名      	# 删除本地分支
+git push origin --delete 分支名 	# 删除远程分支
+
+3. 冲突、回滚、撤销（踩坑高频，必学）
+git checkout -- 文件名	# 撤销工作区修改，还原成暂存区里的版本（未重新add）
+git reset HEAD 文件名	# 清空暂存区（add之后想撤回）
+git reset --hard 提交id	# 回退到某次提交（谨慎使用）
+git reset --hard origin/main	# 放弃本地所有改动，同步远程
+
+4. 储藏临时代码（中途切分支不想提交）
+git stash                 		# 临时保存当前改动
+git stash pop             	# 恢复储藏的代码
+git stash list            		# 查看储藏记录
+
+5. 远程仓库关联
+git remote -v             	# 查看远程仓库地址
+git remote add origin 地址 	# 绑定远程仓库
+
+
+
+git config --global http.proxy http://127.0.0.1:7897
+git config --global https.proxy http://127.0.0.1:7897
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy

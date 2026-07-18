@@ -1,0 +1,162 @@
+help		函数查询
+helpwin		联机帮助
+lookfor		模糊函数查询（不知道函数名全称）
+...		续行
+cd		显示/改变工作目录
+clc		清除命令行窗口
+clear		清除所有变量
+clf		清除图形窗口P31
+close		关闭所有图形窗口	
+echo		在命令行窗口中显示文件中正在运行的每一行(调试时使用)P31
+load		加载指定文件变量P31
+format 		改变数字现实格式P35
+hold 		保持图形
+
+//向量创建
+x = [0 2 4 6]
+x = 0:1:10;
+linspace		创建等间隔向量
+logspace		创建对数等间隔向量
+//向量引用
+x（n）
+x（n1：n2）
+dot或者sum(conj(a).*b)点积
+cross		叉积
+
+//矩阵
+x = [0 2; 4 6] =  [0, 2;4, 6]
+x = [[0 1]; [2, 3]; [4, 5]]
+eig		特征值P70
+inv		矩阵的逆P70
+det		行列式P70
+rank		矩阵的秩P70
+.^		幂运算P70
+
+//多项式
+poly2sym(p)	构建多项式
+conv		乘法
+deconv		除法
+poly		反解根的多项式
+polyder		求导
+
+//元胞
+a = {a, b; c, d}	定义元胞:大括号
+cell()		定义元胞:直接用cell
+//元胞引用		应用元胞:大括号
+E{1}
+
+//结构体
+struct	
+
+//二维绘图
+plot(x1, y1, x2, y2, x3, y3……)绘制图
+plot(x, y, 'r*')	绘制红色*表示的曲线P100
+subplot		多图形显示(传统法)
+tiledlayout	多图形显示(现代法)
+nexttile		下一个区域
+hold on		后续绘制的图形绘制在前面同一个框内
+hold off		取消hold on
+fplot		绘图(一元函数绘图比较光滑)
+figure		新建图窗	p112
+
+axis		设置新的坐标轴
+title		添加标题及副标题
+xlable		给x轴添加指定说明
+text		在固定点文字标注
+gtext		随鼠标标注
+legend		添加图例
+grid		添加分隔线
+
+//三维绘图
+plot3		三维制图
+fplot3		三维制图同fplot
+meshgrid
+mesh		网格图
+fmesh		
+surf		网格图填充满
+fsurf
+hidden
+
+//矩阵分析
+eig		求解特征值
+poly		求矩阵的特征多项式
+roots		求多项式的根
+
+//
+feval
+
+//符号
+sym		创建符号
+eval		符号表达式转数值表达式
+subs		数值表达式转符号表达式
+vpa		精确计算
+factor		因式分解
+expand		展开多项式
+simplify		符号简化
+numden		提取分子分母
+
+
+//积分
+int(f, a ,b)		计算定积分p270
+int(f, x, a ,b)	计算定积分p270
+int(f)		计算不定积分p273
+int(f, x)		计算关于x的不定积分p273
+integral2		计算二重积分p275
+taylor		泰勒展开
+laplace		拉普拉斯变化
+ilaplace		拉普拉斯逆变换
+
+
+调试P190
+try-catch-end
+pause
+continue
+return
+echo
+warning
+error		
+dbstop		断点设置(debug)
+
+
+交互
+input		将键值赋给指定变量
+keyboard		将键值赋值给K
+menu		
+
+自定义函数想被help或者lookfor检索要求：
+function后紧接着
+第一行注释：以%开头的注释行。它应该以函数名开头，并给出函数功能的简要描述。这一行至关重要，因为lookfor命令会在整个搜索路径中查找并显示这一行的内容
+第二行开始的行：继续使用%开头的行编写更详细的说明。这部分内容会在使用help命令时完整显示，通常包括：1输入参数和输出参数的含义及格式。2函数的使用语法示例。3重要的实现细节或注意事项。
+
+F2		转到下一个书签					////
+Shift+F2		转到上一个书签
+Ctrl+F2		添加/移除书签					////
+
+F3		转到下一个当前找到的文本处(使用find后使用)		////
+Shift+F3		转到上一个当前找到的文本处(使用find后使用)		////
+Ctrl+F3		转到当前所选文字的下一处				////
+Ctrl+Shift+F3	转到当前所选文字的上一处				////
+
+Ctrl+/		注释						////
+Ctrl+shift+/	取消注释						////
+
+Ctrl+Shift+-	前进						////
+Ctrl+-		后退						////
+
+Alt+X		折叠代码段	****
+Ctrl+Alt+X	折叠所有代码段	****
+Alt+C		展开代码段	****
+Ctrl+Alt+C	展开所有代码段	****
+
+Ctrl+[		减少缩进		****
+Ctrl+]		增加缩进		****
+
+F5		运行
+F10		步进
+F11		步入
+shift+F11		步出
+
+F9		设置断点
+Ctrl+F9		清除所有断点
+Ctrl+B		使能失能断点
+

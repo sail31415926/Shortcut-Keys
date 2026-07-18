@@ -1,0 +1,69 @@
+Latex
+Ctrl+鼠标左键	转到对应的PDF位置或者编辑器位置			////
+F7		查看代码对应PDF					////
+F5		构建并查看					////
+Ctrl+/ 		注释转换						////
+F3		转到下一个当前找到的文本处(使用Ctrl+F后使用)		////
+Shift+F3		转到上一个当前找到的文本处(使用find后使用)		////
+Ctrl+E		环境						////
+Ctrl+shift+N	公式环境						////
+
+F6		编译不打开查看
+F8		参考文献
+Ctrl+shift+U/D	上下标
+Ctrl+shift+F	分数
+Ctrl+shift+Q	平方根
+Ctrl+G		跳转到*行
+Ctrl+I		意大利题\textit
+Ctrl+B		粗体\textbf
+Ctrl+H		替换		****自定义	
+
+Ctrl+\		到与当前括号匹配的括号				////
+Alt+\		选中当前括号中的所有内容				////
+
+Ctrl+shift+U	转大写		****
+Ctrl+U		转小写		****
+
+Ctrl+F2		添加/移除标签	****
+F2		转到下一处书签	****
+Shift+F2		转到上一处书签	****
+
+F3		转到下一处当前找到的文本处(使用find后使用)	****
+Shift+F3		转到上一处当前找到的文本处(使用find后使用)	****
+
+Alt+X		折叠当前程序	****
+Ctrl+Alt+X	折叠所有程序	****
+Alt+C		展开当前程序	****
+Ctrl+Alt+C	展开所有程序	****
+
+Ctrl+\		跳转到匹配的括号		****
+Alt+\		选中当前括号中的所有内容	****
+
+Ctrl+[		减少缩进		****
+Ctrl+]		增加缩进		****
+
+Ctrl+-		回到上一处修改	****
+Ctrl+Shift+-	回到下一处修改	****
+
+Alt+←		回到上一个光标处	****
+Alt+→		回到下一个光标处	****
+
+Ctrl+D		复制当前行	****
+Alt+Up		上移行		****
+Alt+Down		下移行		****
+
+Ctrl+L		扩选至词末
+Ctrl+K		删除行
+Alt+K		删除至词末
+
+Ctrl+=		放大视图
+Ctrl+Shift+=	缩小视图
+Ctrl+0		还原视图
+Ctrl+F12		设置菜单		****
+
+\\		\newline		\linebreak
+​普通换行​		与 \\效果基本相同	​强制换行
+
+array环境					matrix系列环境
+需手动搭配 \left[ ... \right]等命令添加		自动添加特定括号（如 bmatrix自动加方括号）
+高度灵活，可逐列指定 l（左）、c（中）、r（右）	默认所有列居中对齐，无法单独更改

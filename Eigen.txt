@@ -1,0 +1,82 @@
+矩阵类：Matrix
+一维矩阵用VectorXd，Vector3d 多维用MatrixXd,Matrix33f
+随机初始化构造：Matrix3d::Random();
+全常量构造：VectorXd::Constant(1.2)
+rows(), cols() and size()
+保守大小转换不改变值：conservativeResize()
+点乘，叉乘：dot(), cross()
+转置，共轭以及伴随：transpose(), conjugate(), and adjoint()
+noalias()：无混叠
+sum()累和，prod()累积，maxCoeff()，minCoeff()，mean()算数平均，trace()迹
+ .array()
+cwiseProduct(另一个同大小的矩阵)按位相乘
+
+Array类
+ArrayXXf
+ .abs()， .sqrt()， .min(.)
+ .matrix()
+
+块截取Block
+(i, j) = 分块起始行下标、起始列下标
+p = 截取行数，q = 截取列数
+matrix.block(i, j, p, q); // 常用
+matrix.block<p, q>(i, j);
+
+row(i)获取i行; col(j)获取j列;
+
+矩阵
+功能说明			动态尺寸写法（运行时传参）	固定尺寸模板写法（编译期常量）
+截取左上角 p 行 q 列 子块	matrix.topLeftCorner(p,q);	matrix.topLeftCorner<p,q>();
+截取左下角 p 行 q 列 子块	matrix.bottomLeftCorner(p,q);	matrix.bottomLeftCorner<p,q>();
+截取右上角 p 行 q 列 子块	matrix.topRightCorner(p,q);	matrix.topRightCorner<p,q>();
+截取右下角 p 行 q 列 子块	matrix.bottomRightCorner(p,q);	matrix.bottomRightCorner<p,q>();
+截取最上方 q 行		matrix.topRows(q);		matrix.topRows<q>();
+截取最下方 q 行		matrix.bottomRows(q);	matrix.bottomRows<q>();
+截取最左侧 p 列		matrix.leftCols(p);		matrix.leftCols<p>();
+截取最右侧 q 列		matrix.rightCols(q);		matrix.rightCols<q>();
+从第 i 列开始，向后截取 q 列	matrix.middleCols(i,q);	matrix.middleCols<q>(i);
+从第 i 行开始，向下截取 q 行	matrix.middleRows(i,q);	matrix.middleRows<q>(i);
+
+向量
+功能说明			动态尺寸写法	固定尺寸模板写法
+提取向量最前 n 个元素	vector.head(n);	vector.head<n>();
+提取向量最后 n 个元素	vector.tail(n);	vector.tail<n>();
+从下标 i 开始，向后截取 n 个元素vector.segment(i,n);	vector.segment<n>(i);
+
+
+切片Slice
+function			description	example
+seq(firstIdx,lastIdx)		生成从 firstIdx 到 lastIdx 的连续整数序列		seq(2,5) ⇒ {2,3,4,5}
+seq(firstIdx,lastIdx,incr)	带步长 incr，从 firstIdx 递增到 lastIdx		seq(2,8,2) ⇒ {2,4,6,8}
+seqN(firstIdx,size)		从 firstIdx 开始，生成总共 size 个连续整数		seqN(2,5) ⇒ {2,3,4,5,6}
+seqN(firstIdx,size,incr)	从 firstIdx 开始，步长 incr，一共生成 size 个整数	seqN(2,3,3) ⇒ {2,5,8}
+特殊符号all，last，lastN(3)
+
+
+高级初始化
+Zero();
+Identity()
+LinSpaced(间隔,低,高):向量和一维数组
+Constant()
+setZero();
+setIdentity();
+finished();收尾
+
+广播
+squaredNorm() norm() lpNorm<p>()
+
+count(), all(), any()
+colwise()下面操作按照列
+rowwise()下面操作按照行
+
+
+重新排列Reshape
+reshaped(rows, cols)：惰性视图，不拷贝内存，仅临时改变解读维度，不能原地修改原矩阵；
+reshape(rows, cols)：原地修改本对象尺寸与排布，直接改动自身内存结构，会改变调用它的矩阵本身。
+A = A.reshaped(2,8).eval(); 
+
+ eval()解决混叠问题
+或函数+inPlace例如.transposeInPlace()转置解决混叠
+矩阵乘法默认混叠：noalias()加快效率
+
+data()：返回第一个矩阵元素存储地址
