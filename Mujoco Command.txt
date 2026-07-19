@@ -1,0 +1,52 @@
+一、仿真基础流程（必用）
+函数 / 变量				功能说明							使用场景
+mujoco.mj_step(model, data)			单步物理仿真积分，推进时间步，求解动力学、碰撞、更新所有状态	仿真主循环每帧必调用
+mujoco.mj_forward(model, data)		正向计算：刷新位姿、质心、Cq˙​+g 偏置项，不步进仿真时间		手动修改qpos瞬移后，强制刷新全局所有派生数据；替代 mj_kinematics + mj_comPos
+mujoco.mj_kinematics(model, data)		仅根据qpos计算 body/site 全局坐标xpos、旋转xmat，不更新质心与动力学	极少单独使用，mj_forward已内置
+mujoco.mj_comPos(model, data)		仅更新所有刚体质心世界坐标					极少单独使用，mj_forward已内置
+mujoco.mj_resetData(model, data)		清空 data 全部状态（角度、速度、时间、缓存），环境整体重置		一轮仿真结束后复位机械臂
+mujoco.mj_resetDataKeyframe(model, data, key_id)	加载 XML 预设关键帧姿态复位					精准回到标定初始位姿，比手动赋值更稳定
+
+二、关节状态核心变量（闭环反馈基础）
+变量	含义	读写权限
+data.qpos	广义坐标，旋转关节 = 关节角度 q	可读；可手动赋值瞬移（赋值后必须mj_forward）
+data.qvel	广义速度，旋转关节 = 关节角速度 q˙​	只读，仿真自动更新
+data.ctrl	执行器控制输入数组			只写1. <motor>：填入关节力矩 τ2. <position>：填入目标关节角度 qd​
+
+三、动力学计算（计算力矩 / 力矩控制刚需）
+函数 / 变量				功能				公式对应
+mujoco.mj_fullM(model, M_out, data.qM)		填充稠密关节惯性矩阵 M(q)		Mq¨​+Cq˙​+g=τ
+data.qfrc_bias				直接读取偏置项 Cq˙​+g		无需分开计算科氏力、重力
+mujoco.mj_gravity(model, data)		单独计算重力力矩，存入data.qfrc_grav	仅做重力补偿、不补偿离心项时使用
+
+四、雅可比矩阵（笛卡尔控制 / 阻抗 / 力控核心）
+函数						作用					入参关键说明
+mj_jac(model, data, jacp, jacr, point, body)		通用雅可比jacp：平移雅可比Jp​jacr：旋转雅可比Jr​	point必须是世界坐标系坐标，绑定在指定 body 上
+mj_jacBodyCom(model, data, jacp, jacr, body_id)		直接获取该刚体质心的雅可比			不用手动填 point，封装好质心点位
+mj_jacSite(model, data, jacp, jacr, site_id)			获取 XML 中<site>标记点的雅可比		工程最常用，末端固定打 site，直接调用
+mj_jacDot(model, data, jacdot_p, jacdot_r, point, body)	求解雅可比时间导数 J˙			操作空间控制 OSC 必用，补全J˙q˙​项防止震荡
+
+五、末端位姿读取（获取反馈 x）
+变量				含义
+data.xpos[body_id]			某 body 自身坐标系原点，在世界坐标系下三维位置
+data.xmat[body_id].reshape(3,3)	某 body3×3 世界旋转矩阵
+data.site_xpos[site_id]		XML 自定义标记 site 的世界坐标（优先推荐用这个）
+data.site_xmat[site_id].reshape(3,3)	site 点世界姿态旋转矩阵
+
+六、外力与传感器（力控、碰撞检测）
+变量 / 函数	用途
+data.sensordata	读取 XML 力 / 力矩传感器数值，直接获取末端六维力
+data.contact	存储所有碰撞接触点、接触力、法向，用于碰撞防护
+
+七、内置数学工具（mju_ 工具集，避免手写矩阵出错）
+函数			功能
+mju_mulMatVec(mat, vec, res)	矩阵 × 向量
+mju_quat2Mat(quat, mat)	四元数转为旋转矩阵
+mju_rotVecQuat(res, vec, quat)	用四元数旋转向量
+mju_transformSpatial	空间速度 / 空间力跨坐标系变换
+
+八、函数调用层级极简使用规则
+1.常规仿真循环：只写 mj_step，不需要手动调用 mj_forward/kinematics/comPos；
+2.手动改写data.qpos强行瞬移关节：必须紧跟 mj_forward，一次性刷新位姿、质心、动力学偏置；
+3.想自己完全写 PD / 力矩控制器：XML 执行器全部用<motor>，data.ctrl赋值计算出的\(\tau\)；
+4.想用内置 PD 位置伺服：XML 用<position>，data.ctrl直接赋值目标关节角度\(q_d\)。
