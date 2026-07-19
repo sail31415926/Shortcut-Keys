@@ -17,14 +17,14 @@ data.ctrl	执行器控制输入数组			只写1. <motor>：填入关节力矩 τ
 函数 / 变量				功能				公式对应
 mujoco.mj_fullM(model, M_out, data.qM)		填充稠密关节惯性矩阵 M(q)		Mq¨​+Cq˙​+g=τ
 data.qfrc_bias				直接读取偏置项 Cq˙​+g		无需分开计算科氏力、重力
-mujoco.mj_gravity(model, data)		单独计算重力力矩，存入data.qfrc_grav	仅做重力补偿、不补偿离心项时使用
+mujoco.mj_gravity(model, data)			单独计算重力力矩，存入data.qfrc_grav	仅做重力补偿、不补偿离心项时使用
 
 四、雅可比矩阵（笛卡尔控制 / 阻抗 / 力控核心）
 函数						作用					入参关键说明
 mj_jac(model, data, jacp, jacr, point, body)		通用雅可比jacp：平移雅可比Jp​jacr：旋转雅可比Jr​	point必须是世界坐标系坐标，绑定在指定 body 上
 mj_jacBodyCom(model, data, jacp, jacr, body_id)		直接获取该刚体质心的雅可比			不用手动填 point，封装好质心点位
 mj_jacSite(model, data, jacp, jacr, site_id)			获取 XML 中<site>标记点的雅可比		工程最常用，末端固定打 site，直接调用
-mj_jacDot(model, data, jacdot_p, jacdot_r, point, body)	求解雅可比时间导数 J˙			操作空间控制 OSC 必用，补全J˙q˙​项防止震荡
+mj_jacDot(model, data, jacdot_p, jacdot_r, point, body)	求解雅可比时间导数 J˙				操作空间控制 OSC 必用，补全J˙q˙​项防止震荡
 
 五、末端位姿读取（获取反馈 x）
 变量				含义
