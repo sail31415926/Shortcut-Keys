@@ -1,0 +1,95 @@
+一、rclpy 节点生命周期（Python 代码 API）
+python
+运行
+import rclpy
+# 初始化
+rclpy.init(args=args)
+# 阻塞循环处理回调
+rclpy.spin(node)
+# 单次非阻塞处理
+rclpy.spin_once(node)
+# 销毁节点、关闭接口
+node.destroy_node()
+rclpy.shutdown()
+
+# 节点内置常用方法
+self.create_publisher(消息类型, "话题名", 队列长度)
+self.create_subscription(消息类型, "话题名", 回调函数, 队列长度)
+self.create_timer(周期秒数, 回调函数)
+self.get_logger().info("打印日志")
+
+二、终端启动节点
+bash
+运行
+# 基础启动
+ros2 run 包名 节点名
+# 多机器人命名空间隔离
+ros2 run 包名 节点 --ros-args -r __ns:=/robot1
+# 重映射单个话题
+ros2 run 包名 节点 --ros-args -r 原话题:=新话题
+# 修改节点名称
+ros2 run 包名 节点 --ros-args -r __node:=自定义节点名
+# 加载参数文件启动
+ros2 run 包名 节点 --ros-args --params-file xxx.yaml
+# 调整日志输出等级
+ros2 run 包名 节点 --ros-args --log-level DEBUG
+# 批量启动多个节点
+ros2 launch 包名 xxx.launch.py
+
+三、话题 Topic 操作
+bash
+运行
+ros2 topic list                  			# 列出全部话题
+ros2 topic list | grep image     			# 过滤图像相关话题
+ros2 topic echo /xxx_topic       			# 实时打印话题数据
+ros2 topic echo --once /xxx      			# 仅接收1条消息后退出
+ros2 topic type /xxx_topic       			# 查询话题消息类型
+ros2 topic bw /image_raw         		# 统计话题带宽、帧率
+ros2 topic info /xxx_topic       			# 查看该话题发布/订阅节点
+ros2 topic pub -r 频率 /话题 消息类型 "{数据}"  	# 命令行发布测试消息
+
+四、节点查询
+bash
+运行
+ros2 node list                    	# 查看所有运行节点
+ros2 node info /节点名称          # 查看节点发布、订阅、服务详情
+
+五、消息接口查看
+bash
+运行
+ros2 interface list 包名                  	# 查看包内全部消息
+ros2 interface list | grep Image          	# 模糊检索消息
+ros2 interface show 消息类型全称           	# 查看消息内部字段结构
+
+六、服务 Service
+bash
+运行
+ros2 service list                                      		# 列出所有服务
+ros2 service type /服务名                              	# 查询服务消息类型
+ros2 interface show 服务消息类型                        	# 查看服务请求/响应结构
+ros2 service call /服务名 消息类型 "{参数键: 参数值}"   	# 终端调用服务
+
+七、参数调试
+bash
+运行
+ros2 param list /节点名                		# 查看节点全部参数
+ros2 param get /节点名 参数名          		# 获取单个参数值
+ros2 param set /节点名 参数名 新值     		# 动态修改运行中参数
+ros2 param dump /节点名 保存文件名.yaml 	# 导出参数到文件
+
+八、数据录制与回放 rosbag
+bash
+运行
+ros2 bag record /话题1 /话题2                  	# 录制指定话题
+ros2 bag record -o 包名 /话题1 /话题2     	# 自定义保存包名录制
+ros2 bag play 录制包文件夹名                   	# 回放数据包
+
+九、工程编译 colcon
+bash
+运行
+colcon build                                  	# 编译整个工作空间
+colcon build --packages-select 包名          # 仅编译单个包
+source install/setup.bash                     	# 刷新环境变量
+rm -rf build install log                      	# 清空编译缓存，解决异常报错
+colcon test                                   	# 运行单元测试
+colcon test-result --verbose                  	# 查看测试详细输出
