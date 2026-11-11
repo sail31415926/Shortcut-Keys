@@ -29,7 +29,7 @@ git log --oneline         	# 简洁版提交日志
 git add 文件名            	# 单个文件加入暂存区
 git add .                 		# 全部改动文件加入暂存
 git commit -m "提交备注"  	# 提交到本地仓库 -m:--message，附加本次提交的说明文字
-git push origin 本地分支名    	# 推送到远程仓库，-u = --set-upstream，设置当前本地分支，绑定对应的远程上游分支
+git push (-u) origin 本地分支名    	# 推送到远程仓库，-u = --set-upstream，设置当前本地分支，绑定对应的远程上游分支
 
 拉取更新
 git pull origin 本地分支名    	# 拉取远程最新代码并合并
